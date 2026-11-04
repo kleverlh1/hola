@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¡Hola! 🙂</title>
+<meta name="description" content="Un robotito que te saluda y te dice algo bonito cada vez que vuelves.">
+<meta name="theme-color" content="#fdf6ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1b2d" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="¡Hola! 🙂">
+<meta property="og:description" content="¿Te gustaría ser mi amigo?">
+<meta property="og:image" content="__URL__og.png">
+<meta property="og:url" content="__URL__">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icono-64.png" type="image/png">
+<link rel="apple-touch-icon" href="icono-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="pipo.webp" as="image">
+<style>
+  :root {
+    --fondo: #fdf6ec;
+    --brillo: #ffffff;
+    --halo: rgba(61, 143, 224, 0.16);
+    --tinta: #1d2b3f;
+    --burbuja: #ffffff;
+    --burbuja-tinta: #1d2b3f;
+    --sombra: rgba(29, 43, 63, 0.16);
+    --verde: #25d366;
+    --verde-oscuro: #128c4b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #0f1b2d;
+      --brillo: #1b2c45;
+      --halo: rgba(61, 143, 224, 0.28);
+      --tinta: #eef4fb;
+      --sombra: rgba(0, 0, 0, 0.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: flex; flex-direction: column;
+    min-height: 100%; height: 100dvh; overflow: hidden;
+    font-family: "Nunito", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    color: var(--tinta);
+    background:
+      radial-gradient(ellipse 75% 55% at 50% 45%, var(--halo) 0%, transparent 70%),
+      radial-gradient(ellipse 90% 70% at 50% 40%, var(--brillo) 0%, var(--fondo) 75%);
+    background-color: var(--fondo);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .escena { position: relative; flex: 1; min-height: 0; }
+  .escena canvas, .escena .poster {
+    position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  }
+  .escena canvas { touch-action: manipulation; opacity: 0; transition: opacity .5s ease; }
+  .escena .poster { object-fit: contain; transition: opacity .5s ease; pointer-events: none; }
+  .listo canvas { opacity: 1; }
+  .listo .poster { opacity: 0; }
+
+  .burbuja {
+    position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none;
+    max-width: min(270px, 72vw);
+    background: var(--burbuja); color: var(--burbuja-tinta);
+    padding: 11px 16px; border-radius: 20px;
+    font-size: 17px; font-weight: 700; line-height: 1.3;
+    box-shadow: 0 10px 28px var(--sombra), 0 2px 6px var(--sombra);
+    transform-origin: 18% 100%;
+    opacity: 0; scale: .6;
+    transition: opacity .25s ease, scale .35s cubic-bezier(.3, 1.6, .5, 1);
+  }
+  .burbuja.ver { opacity: 1; scale: 1; }
+  .burbuja.izq { transform-origin: 82% 100%; }
+  .burbuja::after {
+    content: ""; position: absolute; left: 22px; bottom: -9px;
+    border: 10px solid transparent; border-top-color: var(--burbuja); border-bottom: 0;
+  }
+  .burbuja.izq::after { left: auto; right: 22px; }
+  /* Sin 3D: el globo queda fijo sobre la imagen */
+  .sin-3d .burbuja { left: 50%; top: 6%; translate: -50% 0; }
+
+  .invitacion {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 14px 16px calc(22px + env(safe-area-inset-bottom));
+  }
+  .invitacion p { margin: 0; font-size: clamp(19px, 5.4vw, 24px); font-weight: 800; letter-spacing: .1px; }
+  .wa {
+    flex: none; display: grid; place-items: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--verde); color: #fff;
+    box-shadow: 0 6px 16px rgba(37, 211, 102, .35);
+    transition: transform .15s ease, background .15s ease;
+  }
+  .wa:hover { background: var(--verde-oscuro); }
+  .wa:active { transform: scale(.92); }
+  .wa:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+  .wa svg { width: 25px; height: 25px; }
+</style>
+</head>
+<body>
+<main class="escena" id="escena">
+  <img class="poster" src="pipo.webp" alt="Pipo, un robotito azul sentado en un puf amarillo con una lata roja">
+  <canvas id="pipo" aria-label="Pipo, un robotito azul. Tócalo y te dice algo bonito." role="img"></canvas>
+  <div class="burbuja" id="burbuja" aria-live="polite"></div>
+</main>
+<footer class="invitacion">
+  <p>¿Te gustaría ser mi amigo?</p>
+  <a class="wa" href="https://wa.me/__WHATSAPP__?text=__MENSAJE__" target="_blank" rel="noopener" aria-label="Escríbeme por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.24.68-1.41 1.3-1.95 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.3-.13.59.17.29.74 1.22 1.58 1.97 1.09.97 2 1.27 2.29 1.41.29.14.46.12.63-.07.17-.2.72-.84.92-1.13.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.93.29.14.48.22.55.34.07.12.07.7-.17 1.38Z"/></svg>
+  </a>
+</footer>
+<script src="app.js?v=__VERSION__" defer></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "hola-pipo",
+  "version": "1.0.0",
+  "description": "Pipo: un robotito 3D que te invita a ser amigo de Klever",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "capturas": "node build.mjs && node capturas.cjs",
+    "tarjeta": "node tarjeta.cjs",
+    "test": "node --test pruebas/*.test.js"
+  },
+  "dependencies": {
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "qrcode": "^1.5.4"
+  }
+}
