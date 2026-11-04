@@ -3,25 +3,20 @@
 // Cada paso tiene una duración (d, en segundos) y una pose objetivo (p).
 // Los valores se alcanzan con resortes, así que los movimientos aceleran y frenan solos.
 
-import { PASEO } from './paseo.js';
-
 // Pose de reposo
 export const REST = {
   headYaw: 0, headPitch: 0, headRoll: 0, gazeX: 0, gazeY: 0, leanX: 0, leanZ: 0,
   rShX: -0.35, rShZ: -0.1, rEl: -0.9, lShX: -0.35, lShZ: 0.1, lEl: -0.9, ikR: 1, ikL: 1,
   swing: 1, happy: 0, brow: 0, tilt: 0, smile: 0.5, blush: 0.35, wave: 0, pupil: 1,
-  // Paseo (ver paseo.js): sentado en su sitio, sin caminar
-  stand: 0, walk: 0, rootX: 0, rootY: 0, rootZ: 0, rootYaw: 0, crouch: 0, pant: 0, sip: 0,
 };
 
 // Inclinarse para tomar la lata del puf
 const REACH = { headYaw: -0.45, headPitch: 0.36, headRoll: 0.05, gazeX: -0.8, gazeY: 0.75, leanZ: 0.12, swing: 0.15 };
 
-// Gesto firma (en bucle): mira alrededor, toma la lata y te la ofrece (unos 17 s);
-// luego da un paseo y se toma su gaseosa (unos 26 s, en paseo.js).
+// Gesto firma (unos 17 s, en bucle): mira alrededor, toma la lata y te la ofrece.
 // cam: mira a la cámara · lock: no sigue el cursor · rt: objetivo de la mano derecha
 // grip: sostiene la lata · bubble: texto de la burbuja · talk: segundos moviendo la boca
-const OFRECER = [
+export const SEQ = [
   { d: 2.4, p: { headYaw: -0.38, headPitch: 0.3, headRoll: 0.07, gazeX: -0.75, gazeY: 0.7, smile: 0.4 } },
   { d: 2.2, p: { headYaw: 0.36, headPitch: -0.12, headRoll: -0.08, gazeX: 0.75, gazeY: -0.3, smile: 0.4, brow: 0.5 } },
   { d: 1.6, cam: true, p: { brow: 0.35, smile: 1, blush: 0.6, swing: 0.35 } },
@@ -33,7 +28,6 @@ const OFRECER = [
   { d: 0.45, lock: true, rt: 'phone', p: REACH },
   { d: 1.8, cam: true, p: { smile: 0.7 } },
 ];
-export const SEQ = [...OFRECER, ...PASEO];
 export const SEQ_TOTAL = SEQ.reduce((a, s) => a + s.d, 0);
 
 // Reacciones puntuales (al tocarlo o desde la página)

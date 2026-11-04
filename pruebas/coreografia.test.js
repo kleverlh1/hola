@@ -1,9 +1,9 @@
-// Pruebas de los datos de los gestos (coreografia.js y paseo.js):  npm test
+// Pruebas de los datos de los gestos (coreografia.js):  npm test
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { REST, SEQ, SEQ_TOTAL, REACTIONS } from '../src/pipo/coreografia.js';
 
-const OBJETIVOS = ['rest', 'phone', 'rodillas'];
+const OBJETIVOS = ['rest', 'phone'];
 
 test('cada paso tiene duración, poses conocidas y un objetivo de manos válido', () => {
   for (const [i, s] of SEQ.entries()) {
@@ -15,10 +15,8 @@ test('cada paso tiene duración, poses conocidas y un objetivo de manos válido'
   for (const [n, r] of Object.entries(REACTIONS)) for (const k of Object.keys(r.p)) assert.ok(k in REST, `${n}: «${k}»`);
 });
 
-test('el bucle termina sentado en su sitio, como empieza', () => {
-  const ultimo = { ...REST, ...SEQ.at(-1).p };
-  for (const k of ['stand', 'walk', 'rootX', 'rootY', 'rootZ', 'rootYaw', 'crouch', 'sip']) assert.equal(ultimo[k], 0, k);
-  assert.ok(SEQ_TOTAL > 30 && SEQ_TOTAL < 60, `dura ${SEQ_TOTAL} s`);
+test('el bucle dura lo justo para ver todo el gesto', () => {
+  assert.ok(SEQ_TOTAL > 10 && SEQ_TOTAL < 25, `dura ${SEQ_TOTAL} s`);
 });
 
 test('la primera parte es ofrecer la cocacolita (lo primero que ve quien escanea)', () => {
