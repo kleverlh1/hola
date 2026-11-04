@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
+    "ver": "node build.mjs && npx --yes serve dist",
     "capturas": "node build.mjs && node capturas.cjs",
     "tarjeta": "node tarjeta.cjs",
     "test": "node --test pruebas/*.test.js"

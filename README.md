@@ -37,14 +37,25 @@ Carpeta [`tarjeta/`](tarjeta/):
 
 El QR lleva a una dirección fija: puedes cambiar la página o las frases **sin volver a imprimir**.
 
-## Comandos
-```
+## Trabajar en tu computadora
+**Necesitas:** [Git](https://git-scm.com), [Node.js 22](https://nodejs.org) y un editor (VS Code). Todo está en la rama **`main`**.
+
+```bash
+git clone https://github.com/kleverlh1/hola.git
+cd hola
 npm install
-npm test            # pruebas de las frases y de los gestos
-npm run build       # genera dist/ (lo que se publica)
-npm run capturas    # vuelve a generar las imágenes de Pipo (public/) desde el 3D
-npm run tarjeta     # vuelve a generar el QR y las tarjetas (tarjeta/)
+npm run ver         # arma la página y la abre en http://localhost:3000
 ```
+
+| Comando | Qué hace |
+|---|---|
+| `npm run ver` | Arma la página (`dist/`) y la sirve en tu computadora para verla en el navegador. |
+| `npm test` | Pruebas de las frases y de los gestos (lo mismo que revisa GitHub antes de publicar). |
+| `npm run build` | Solo arma `dist/` (lo que se publica). |
+| `npm run capturas` | Vuelve a generar las imágenes de Pipo (`public/`) desde el 3D. Antes, una vez: `npx playwright install chromium`. |
+| `npm run tarjeta` | Vuelve a generar el QR y las tarjetas (`tarjeta/`). Igual, necesita Playwright. |
+
+**Publicar:** haz `git push` a `main`. GitHub prueba y publica solo en GitHub Pages (1–2 minutos); si una prueba falla, no publica. Se ve en la pestaña *Actions* del repositorio.
 
 ## Cómo está hecho
 - **Pipo** usa el mismo motor 3D que Basi (asistente-unjbg), con otra identidad: azul cielo (el color preferido en casi todos los países; transmite confianza y calma), sentado en un puf amarillo, con una lata roja sin marcas y un botoncito en el pecho.
