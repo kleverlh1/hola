@@ -190,12 +190,14 @@ export function crearModelo(scene, maxAniso) {
   const PHONE_REST_POS = new THREE.Vector3(-0.5, SEAT_Y + LATA.alto / 2, -0.2);
   const PHONE_REST_Q = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0.3, 0));
   const PHONE_UP_Q = new THREE.Quaternion().setFromEuler(new THREE.Euler(0.12, 0.15, 0.1));
+  // Al tomar: la lata se inclina hacia la boca (el robot la sostiene con la mano derecha, a su lado)
+  const PHONE_SIP_Q = new THREE.Quaternion().setFromEuler(new THREE.Euler(0.5, 0, -1.25));
   phone.position.copy(PHONE_REST_POS);
   phone.quaternion.copy(PHONE_REST_Q);
 
   return {
     M, theme, cara, robot, body, neck, head, armR, armL, legR, legL, phone, robotMeshes,
-    PHONE_REST_POS, PHONE_REST_Q, PHONE_UP_Q, setTheme,
+    PHONE_REST_POS, PHONE_REST_Q, PHONE_UP_Q, PHONE_SIP_Q, setTheme,
     cargarLogo: () => Promise.resolve(),
   };
 }

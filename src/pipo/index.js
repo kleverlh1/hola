@@ -54,6 +54,10 @@ export function crear(o) {
   S.grip = new Spring(0, 150, 1);
   S.wave.k = 30;
   S.ikR.k = S.ikL.k = 30;
+  // Caminar: el cuerpo avanza despacio (pasos cortitos); el salto rebota un poco
+  const ajustar = (k, rigidez, amortiguacion = 1) => { S[k].k = rigidez; S[k].c = 2 * amortiguacion * Math.sqrt(rigidez); };
+  ajustar('rootX', 4.5); ajustar('rootZ', 4.5); ajustar('rootY', 70, 0.55);
+  ajustar('stand', 28, 0.9); ajustar('rootYaw', 22); ajustar('crouch', 40, 0.85); ajustar('sip', 20);
 
   const moverCuerpo = crearCuerpo(B);
 
@@ -63,7 +67,7 @@ export function crear(o) {
     pointer: new THREE.Vector2(), pointerT: -10,
     blinkNext: 1.5, blinkT: -1, doubleBlink: false,
     idleNext: 2, idleGaze: [0, 0],
-    swingPhase: 0, time: 0,
+    swingPhase: 0, walkPhase: 0, time: 0,
     forzar: {},  // { open, talk }: fija párpado o boca (para capturas)
     frase: { vuelta: -1, texto: null },  // frase de la lata en la vuelta actual
     dicho: null,  // reacción armada por decir()

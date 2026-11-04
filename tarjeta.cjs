@@ -7,7 +7,7 @@ const { chromium } = require('playwright');
 const fs = require('node:fs');
 
 const URL_PAGINA = 'https://kleverlh1.github.io/hola/';
-const TINTA = '#1d2b3f', FONDO = '#fdf6ec';
+const TINTA = '#1d2b3f', FONDO = '#f4f9fe';
 
 (async () => {
   fs.mkdirSync('tarjeta', { recursive: true });

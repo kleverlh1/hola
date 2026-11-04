@@ -9,7 +9,7 @@ const fs = require('node:fs');
 
 const ENCUADRE = { objetivo: [0, 0.72, 0], alto: 1.45, ancho: 0.92 }; // el mismo de src/app.js
 const BUSTO = { objetivo: [0.02, 1.08, 0], alto: 0.66, ancho: 0.66 };
-const FONDO = '#fdf6ec';
+const FONDO = '#f4f9fe';
 
 (async () => {
   const lib = esbuild.buildSync({ entryPoints: ['src/pipo/index.js'], bundle: true, format: 'iife', globalName: 'Pipo3D', write: false }).outputFiles[0].text;

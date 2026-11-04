@@ -10,12 +10,14 @@ Si no escribe, no pasa nada: cada vez que vuelva a abrir la página, Pipo le dir
 | | |
 |---|---|
 | **Primera visita** | Pipo dice «¡Hola! 👋», mira alrededor, toma su lata del puf y pregunta «¿Quieres una cocacolita? 🥤». |
+| **Paseo** | Después de ofrecer la lata, Pipo baja del puf, camina, se cansa (se agacha con las manos en las rodillas, jadeando: «¡Uf! Me cansé 😮‍💨»), vuelve, salta al puf y se toma su gaseosa («¡Ahh, qué rica! 😋»). Todo el bucle dura unos 42 s. |
 | **Visitas siguientes** | Saluda con una frase de regreso («¡Volviste! Qué alegría 😊») y, en cada vuelta, dice una frase distinta al ofrecer la lata. |
 | **Al tocarlo** | Dice otra frase con un gesto (feliz, saludar, hablar). |
-| **WhatsApp** | El botón verde abre el chat con «¡Hola! 😊» ya escrito. |
+| **WhatsApp** | El botón verde abre el chat con «Hola, acepto una cocacolita 🥤» ya escrito. |
 | **Sin 3D** | Si el celular no puede mostrar 3D, queda la imagen de Pipo y las frases igual salen al tocarla. |
 | **Privacidad** | No hay servidor ni base de datos: lo que Pipo ya dijo se guarda solo en el celular de cada persona. |
 | **Instalable** | Quien quiera puede agregarlo a su pantalla de inicio. |
+| **Fondo** | Siempre claro y suave, aunque el celular esté en modo oscuro. |
 
 ## Cambiar cosas
 | Quiero cambiar… | Dónde |
@@ -24,7 +26,8 @@ Si no escribe, no pasa nada: cada vez que vuelva a abrir la página, Pipo le dir
 | El número o el mensaje de WhatsApp | `build.mjs`, arriba. |
 | El texto «¿Te gustaría ser mi amigo?» | `src/index.html` (y la vista previa en `capturas.cjs`). |
 | El color de Pipo | `COLOR` en `src/pipo/modelo.js` (luego `npm run capturas`). |
-| Los gestos | `src/pipo/coreografia.js` (solo datos: poses y duraciones). |
+| Los gestos | `src/pipo/coreografia.js` (ofrecer la lata) y `src/pipo/paseo.js` (caminar, cansarse, tomar): solo datos, poses y duraciones. |
+| El fondo | `--fondo` en `src/index.html`. |
 
 Al hacer push a `main`, GitHub prueba y publica solo (1–2 minutos).
 
@@ -38,7 +41,7 @@ El QR lleva a una dirección fija: puedes cambiar la página o las frases **sin 
 ## Comandos
 ```
 npm install
-npm test            # pruebas de las frases
+npm test            # pruebas de las frases y de los gestos
 npm run build       # genera dist/ (lo que se publica)
 npm run capturas    # vuelve a generar las imágenes de Pipo (public/) desde el 3D
 npm run tarjeta     # vuelve a generar el QR y las tarjetas (tarjeta/)
@@ -54,7 +57,14 @@ npm run tarjeta     # vuelve a generar el QR y las tarjetas (tarjeta/)
 | `src/index.html` | La página y sus estilos (modo claro y oscuro). |
 | `src/app.js` | Arma la página: Pipo, saludo, frases al tocarlo. |
 | `src/frases.js` | Qué frase decir según la hora, el día y lo que ya dijo. |
-| `src/pipo/` | El personaje 3D: `modelo.js` (cuerpo, puf, lata), `coreografia.js` (gestos), `cara.js`, `cuerpo.js`, `brazos.js`, `camara.js`, `escena.js`, `index.js`. |
+| `src/pipo/modelo.js` | Cómo es Pipo: cuerpo, puf, lata y color. |
+| `src/pipo/coreografia.js` | Gestos (solo datos): reposo, ofrecer la lata, reacciones al tocarlo. |
+| `src/pipo/paseo.js` | El paseo (solo datos): bajar, caminar, cansarse, volver, saltar al puf, tomar. |
+| `src/pipo/piernas.js` | Sentado o de pie, pasos al caminar y pies siempre apoyados en el suelo. |
+| `src/pipo/cuerpo.js` | Cada cuadro: respiración, cabeza, brazos, cara y lata. |
+| `src/pipo/brazos.js` | Las manos llegan a su objetivo (el puf, la lata, las rodillas). |
+| `src/pipo/cara.js`, `camara.js`, `escena.js`, `geometria.js` | Pantalla de la cara, cámara, luces y formas base. |
+| `src/pipo/index.js` | Junta todo: resortes, secuencia, mirada, toques y globo de diálogo. |
 | `build.mjs` | Junta todo en `dist/`. |
 | `capturas.cjs`, `tarjeta.cjs` | Imágenes de Pipo, QR y tarjetas. |
 | `.github/workflows/publicar.yml` | Prueba y publica en GitHub Pages. |

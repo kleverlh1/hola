@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¡Hola! 🙂</title>
 <meta name="description" content="Un robotito que te saluda y te dice algo bonito cada vez que vuelves.">
-<meta name="theme-color" content="#fdf6ec" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f1b2d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f9fe">
 <meta property="og:title" content="¡Hola! 🙂">
 <meta property="og:description" content="¿Te gustaría ser mi amigo?">
 <meta property="og:image" content="__URL__og.png">
@@ -18,25 +17,18 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preload" href="pipo.webp" as="image">
 <style>
+  /* Siempre claro y suave (aunque el celular esté en modo oscuro) */
   :root {
-    --fondo: #fdf6ec;
+    color-scheme: light;
+    --fondo: #f4f9fe;
     --brillo: #ffffff;
-    --halo: rgba(61, 143, 224, 0.16);
+    --halo: rgba(61, 143, 224, 0.08);
     --tinta: #1d2b3f;
     --burbuja: #ffffff;
     --burbuja-tinta: #1d2b3f;
-    --sombra: rgba(29, 43, 63, 0.16);
+    --sombra: rgba(29, 43, 63, 0.14);
     --verde: #25d366;
     --verde-oscuro: #128c4b;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --fondo: #0f1b2d;
-      --brillo: #1b2c45;
-      --halo: rgba(61, 143, 224, 0.28);
-      --tinta: #eef4fb;
-      --sombra: rgba(0, 0, 0, 0.4);
-    }
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; }

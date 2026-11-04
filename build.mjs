@@ -8,7 +8,7 @@ import { leerLista } from './src/frases.js';
 // ── Datos de la página (cambia aquí tu número o el mensaje que llega por WhatsApp)
 const URL_PAGINA = 'https://kleverlh1.github.io/hola/';
 const WHATSAPP = '51924174301';
-const MENSAJE = '¡Hola! 😊';
+const MENSAJE = 'Hola, acepto una cocacolita 🥤';
 
 // Frases: frases/<categoría>.txt, una por línea
 const FRASES = {};
